@@ -1,0 +1,12 @@
+<h3>
+    <a href="/comments/{{comment._id}}">{{comment.title}}</a>
+</h3>
+<p>
+    <small>{{formatTime comment.date}}</small>
+    <br>
+    {{comment.body}}
+</p>
+
+<form method="post" action="/comments/{{comment._id}}?_method=DELETE">
+    <button>Remove</button>
+</form>
