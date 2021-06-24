@@ -3,8 +3,17 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
+            <li><a href="/comments">Comments</a></li>
             <li><a href="/about">About Us</a></li>
             <li><a href="/users">Users</a></li>
+            {{#if current_user}}
+                <form method="post" action="/sessions?_method=DELETE">
+                    <input type="submit" value="Log Out">
+                </form>
+            {{else}}
+                <li><a href="/sessions/new">Log In</a></li>
+                <li><a href="/users/new">Registration</a></li>
+            {{/if}}
         </ul>
     </nav>
 </header>
