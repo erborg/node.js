@@ -5,8 +5,14 @@
     <small>{{formatTime comment.date}}</small>
     <br>
     {{comment.body}}
+    <br>
+    Added by: {{comment.user.name}} {{comment.user.surname}}
 </p>
 
+{{#if current_user}}
+    {{#when current_user._id 'eqObj' comment.user._id}}
 <form method="post" action="/comments/{{comment._id}}?_method=DELETE">
     <button>Remove</button>
 </form>
+    {{/when}}
+{{/if}}

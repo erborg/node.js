@@ -6,6 +6,7 @@ const __dirname = path.resolve()
 export function setupHbs(app) {
     app.set('view engine', 'hbs')
     hbs.registerPartials(path.join(__dirname, 'views/partials'))
+
     hbs.registerHelper('formatTime', function (date) {
         return date.toLocaleDateString('ru-RU', {
             year: 'numeric',
@@ -15,6 +16,15 @@ export function setupHbs(app) {
             minute: 'numeric',
             second: 'numeric'
         })
+    })
+
+    hbs.registerHelper("when", function(operand_1, operator, operand_2, options) {
+        const operators = {
+            'eqObj': function(l,r) { return l.toString() === r.toString() }
+        }
+        const result = operators[operator](operand_1, operand_2)
+        if (result) return options.fn(this)
+        else return options.inverse(this)
     })
 }
 

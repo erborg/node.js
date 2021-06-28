@@ -1,7 +1,8 @@
 {{#each comments}}
-    {{>comments/comment comment=.}}
+    {{>comments/comment comment=. current_user=../current_user}}
 {{/each}}
 
+{{#if current_user}}
 <form action="/comments" method="post">
     <div>
         <label for="comment_title">Title</label>
@@ -15,3 +16,4 @@
         <input type="submit" value="Add!">
     </div>
 </form>
+{{/if}}

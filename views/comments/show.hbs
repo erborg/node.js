@@ -4,6 +4,8 @@
 
 <em>{{formatTime comment.date}}</em>
 
+{{#if current_user}}
+    {{#when current_user._id 'eqObj' comment.user._id}}
 <form action="/comments/{{comment._id}}?_method=PUT" method="post">
     <div>
         <label for="comment_title">Title</label>
@@ -17,3 +19,5 @@
         <input type="submit" value="Update!">
     </div>
 </form>
+    {{/when}}
+{{/if}}
