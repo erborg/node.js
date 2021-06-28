@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import {User} from "../models/user.js";
 import {ApplicationController} from "./application_controller.js";
+import {validationResult} from "express-validator";
 
 export class UsersController extends ApplicationController {
     static index(req, res) {
@@ -13,18 +14,26 @@ export class UsersController extends ApplicationController {
         this.renderView(req, res, 'users/new',{main_title: "Register"})
     }
     static create(req, res) {
-        const saltRounds = 10
-        bcrypt.hash(req.body.user_password, saltRounds).then((hash) => {
-            const user = new User({
-                username: req.body["user_username"],
-                email: req.body["user_email"],
-                name: req.body["user_name"],
-                surname: req.body["user_surname"],
-                hashed_password: hash
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return this.renderView(req, res, 'users/new',{main_title: "Register", errors: errors.array()})
+        }
+            const saltRounds = 10
+            bcrypt.hash(req.body.user_password, saltRounds).then((hash) => {
+                const user = new User({
+                    username: req.body["user_username"],
+                    email: req.body["user_email"],
+                    name: req.body["user_name"],
+                    surname: req.body["user_surname"],
+                    hashed_password: hash
+                })
+                user.save().then(() => {
+                    res.redirect('/')
+                }).catch((e) => {
+                    res.status(400).json({
+                        error: e
+                    })
+                })
             })
-            user.save().then(() => {
-                res.redirect('/')
-            })
-        })
     }
 }
