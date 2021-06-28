@@ -1,16 +1,14 @@
 {
   "name": "node.js",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint config controllers models views/**/**/**",
+    "eslint:fix": "npm run eslint --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "5.0.1",
     "cookie-session": "1.4.0",
@@ -20,5 +18,12 @@
     "method-override": "3.0.0",
     "mongoose": "5.12.14",
     "mongoose-unique-validator": "2.0.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "10.1.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "3.4.0",
+    "prettier": "2.3.2",
+    "prettier-eslint": "12.0.0"
   }
 }
