@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import methodOverride from 'method-override';
 import flash from 'connect-flash';
 import { router } from './config/router.js';
-import { setupHbs } from './config/hbs.js';
+import { setupAssets } from './config/assets.js';
 
 await mongoose.connect('mongodb://localhost/mcs', {
   useNewUrlParser: true,
@@ -15,7 +15,7 @@ await mongoose.connect('mongodb://localhost/mcs', {
 
 const app = express();
 
-setupHbs(app);
+setupAssets(app, express);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));

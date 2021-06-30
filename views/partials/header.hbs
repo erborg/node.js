@@ -7,9 +7,14 @@
       <li><a href='/about'>About Us</a></li>
       <li><a href='/users'>Users</a></li>
       {{#if current_user}}
-        <form method='post' action='/sessions?_method=DELETE'>
-          <input type='submit' value='Log Out' />
-        </form>
+        <li>
+          Logged in as {{current_user.name}} {{current_user.surname}}
+        </li>
+        <li>
+          <form method='post' action='/sessions?_method=DELETE'>
+            <input type='submit' value='Log Out' />
+          </form>
+        </li>
       {{else}}
         <li><a href='/sessions/new'>Log In</a></li>
         <li><a href='/users/new'>Registration</a></li>

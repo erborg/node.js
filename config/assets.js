@@ -1,9 +1,11 @@
 import hbs from 'hbs';
 import path from 'path';
+import express from 'express';
 
 const __dirname = path.resolve();
 
-export function setupHbs(app) {
+export function setupAssets(app, express) {
+  app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
   app.set('view engine', 'hbs');
   hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
