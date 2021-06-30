@@ -9,12 +9,15 @@ export class SessionsController extends ApplicationController {
   static create(req, res) {
     User.findOne({ email: req.body.user_email }).then((user) => {
       if (!user) {
-        res.redirect('/sessions/new');
+        req.flash('data', { warning: 'Credentials are incorrect' });
+        return res.redirect('/sessions/new');
       }
       bcrypt.compare(req.body.user_password, user.hashed_password).then((valid) => {
         if (!valid) {
-          res.redirect('/sessions/new');
+          req.flash('data', { warning: 'Credentials are incorrect' });
+          return res.redirect('/sessions/new');
         }
+        req.flash('data', { success: 'Welcome!' });
         req.session.user = user;
         res.redirect('/');
       });

@@ -26,10 +26,9 @@ export class CommentsController extends ApplicationController {
           comment: comment,
         });
       })
-      .catch((error) => {
-        res.status(400).json({
-          error: error,
-        });
+      .catch((_error) => {
+        req.flash('data', { warning: 'Cannot find comment' });
+        res.redirect('/comments');
       });
   }
   static create(req, res) {

@@ -17,3 +17,11 @@
     </ul>
   </nav>
 </header>
+
+{{#each flash_messages as |msg|}}
+  {{#each msg}}
+    <div class='alert alert-{{@key}}'>
+      {{this}}
+    </div>
+  {{/each}}
+{{/each}}
